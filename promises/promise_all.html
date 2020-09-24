@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My All Promises</title>
+</head>
+<body>
+  <p></p>
+  <script>
+    
+    function fetchAndDecode(url, type) {
+      return fetch(url).then(response => {
+        if (!response.ok) {
+          throw new Error (`HTTP error! status: ${response.status}`);
+        } else {
+          console.log("type ==", type)
+          if (type === 'blob') {
+            return response.blob();
+          } else if (type === 'text'){
+            return response.text()
+          }
+        }
+      }).catch(e => {
+        console.log(`There has been a problem with your fetch operation for resource "${url}": ` + e.message);
+        console.info("fataaaa")
+      }).finally(() =>{
+        console.info(`fetch attempt for "${url}" finished.`);
+      });
+      
+    }
+    let coffee = fetchAndDecode('coffee.jpg', 'blob');
+    let tea = fetchAndDecode('tea.jpg', 'blob');
+    let description = fetchAndDecode('description.txt', 'text')
+
+    Promise.all([coffee,tea,description]).then(values =>{
+      console.log(values);
+      let objectURL1 = URL.createObjectURL(values[0]);
+      let objectURL2 = URL.createObjectURL(values[1]);
+      let descText = values[2];
+
+      // Display the images in <img> elements
+      let image1 = document.createElement('img');
+      let image2 = document.createElement('img');
+      image1.src = objectURL1;
+      image2.src = objectURL2;
+      document.body.appendChild(image1);
+      document.body.appendChild(image2);
+
+      // Display the text in a paragraph
+      let para = document.createElement('p');
+      para.textContent = descText;
+      document.body.appendChild(para);
+      
+    });
+  </script>
+</body>
+</html>

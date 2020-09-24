@@ -1,0 +1,19 @@
+p {
+  position: absolute;
+  margin: 0;
+  top: 35px;
+  right: 5px;
+  color: #aaa;
+}
+
+#win-message{
+  font-size: 10rem;
+  letter-spacing: -1px;
+  position: absolute;
+  margin: 0;
+  top: 68px;
+  left: 72px;
+  color: transparent;
+  text-shadow: 0 0 4px white;
+  display: none;
+}

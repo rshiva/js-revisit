@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p id="demo"></p>
+  <button id='start' >Start</button>
+  <button id='stop'>Stop</button>
+  <button id= 'reset'>Reset</button>
+  <script>
+    // function displayTime(){
+    //   let date = new Date();
+    //   let time = date.toLocaleTimeString();
+    //   document.getElementById('demo').textContent = time;
+      
+    // }
+    // const createClock = setInterval(displayTime, 1000);
+    let startSecond = 0;
+    let watch;
+    const displayPara = document.getElementById('demo')
+    function displayTime(){
+      
+      let hours = Math.floor(startSecond/3600);
+      let minutes = Math.floor((startSecond % 3600)/60);
+      let seconds = Math.floor(startSecond % 60)
+
+      let displayHours = (hours < 10) ? '0' + hours : hours;
+      let displayMinutes = (minutes < 10) ? '0' + minutes : minutes;
+      let displaySeconds = (seconds < 10) ? '0' + seconds : seconds;
+
+      displayPara.textContent = displayHours + ':' + displayMinutes + ':' + displaySeconds;
+      startSecond++;
+    }
+    const startButton =  document.getElementById("start")
+    const stopButton =  document.getElementById("stop")
+    const resetButton =  document.getElementById("reset")
+
+    startButton.addEventListener('click', () =>{
+      watch = setInterval(displayTime, 1000)
+      startButton.disabled = true;
+    });
+
+
+    stopButton.addEventListener('click', () =>{
+      clearInterval(watch);
+      startButton.disabled=false;
+    });
+
+    resetButton.addEventListener('click', () =>{
+      clearInterval(watch);
+      startButton.disabled=false;
+      startSecond = 0;
+      displayTime();
+    });
+
+
+      displayTime();
+  </script>
+</body>
+</html>

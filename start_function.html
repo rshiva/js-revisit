@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Function start</title>
+    <style>
+      .msgBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 242px;
+        background: #eee;
+      }
+
+      .msgBox p {
+        line-height: 1.5;
+        padding: 10px 20px;
+        color: #333;
+        padding-left: 82px;
+        background-position: 25px center;
+        background-repeat: no-repeat;
+      }
+
+      .msgBox button {
+        background: none;
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.1rem;
+        color: #aaa;
+      }
+
+    </style>
+  </head>
+  <body>
+    <button>Display message box</button>
+
+    <ul id="parent-list">
+      <li id="post-1">Item 1</li>
+      <li id="post-2">Item 2</li>
+      <li id="post-3">Item 3</li>
+      <li id="post-4">Item 4</li>
+      <li id="post-5">Item 5</li>
+      <li id="post-6">Item 6</li>
+    </ul>
+
+    <script>
+      const btn = document.querySelector('button');
+      btn.onclick = function(){
+        displayMessage('Woo, this is a different message!','chat');
+      }
+
+      function displayMessage(msgText, msgType){
+        const html = document.querySelector('html');
+        const panel =  document.createElement('div');
+
+        panel.setAttribute('class', 'msgBox');
+        html.appendChild(panel);
+
+        const msg = document.createElement('p');
+        msg.textContent = msgText
+        panel.appendChild(msg);
+
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = 'x';
+        panel.appendChild(closeBtn);
+
+        closeBtn.onclick = function(){
+          panel.parentNode.removeChild(panel);
+        }
+
+        if (msgType === 'warning') {
+          msg.style.backgroundImage = 'url(icons/warning)';
+          msg.style.backgroundColor = 'red';
+
+        }else if(msgType === 'chat'){
+          msg.style.backgroundImage = 'url(icons/chat)';
+          msg.style.backgroundColor = 'aqua';
+        }else {
+           msg.style.paddingLeft = '20px';
+        }
+        
+      }
+      // displayMessage();
+
+      document.getElementById("parent-list").addEventListener("click", function(e) {
+	      // e.target is the clicked element!
+	      // If it was a list item
+        if(e.target && e.target.nodeName == "LI") {
+          // List item found!  Output the ID!
+          console.log("List item ", e.target.id.replace("post-", ""), " was clicked!");
+        }
+      });
+    </script>
+  </body>
+</html>
