@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="myCanvas">
+    <p>Browser does not support canvas</p>
+  </canvas>
+  <script>
+    const canvas = document.querySelector(".myCanvas")
+    const width = canvas.width = window.innerWidth;
+    const height = canvas.height = window.innerHeight;
+
+    var ctx  = canvas.getContext('2d');
+
+    // ctx.fillStyle = 'rgb(255,255,0, 0.75)';
+    // ctx.fillRect(75,75, 100, 100);
+
+    //outlines or strokes in graphics
+    // ctx.strokeStyle = 'rgb(255, 0, 255)';
+    // ctx.strokeRect(25, 25, 175, 200);
+    // ctx.lineWidth = 5;
+
+    ctx.fillStyle = 'rgb(255,0,0)';
+    ctx.fillRect(0,0,width,height);
+    ctx.beginPath();
+    ctx.moveTo(150,250);
+    ctx.lineWidth = 5;
+    ctx.fill();
+  </script>
+</body>
+</html>
